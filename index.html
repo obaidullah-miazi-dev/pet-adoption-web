@@ -16,11 +16,56 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="styles/style.css">
+    <!-- font awesome cdn  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
-
+    <header class="w-11/12 mx-auto">
+        <!-- nav section  -->
+        <nav class="mt-8">
+            <div class="navbar bg-base-100">
+                <div class="navbar-start">
+                    <div class="dropdown">
+                        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden p-0 pr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h8m-8 6h16" />
+                            </svg>
+                        </div>
+                        <ul tabindex="0"
+                            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 md:p-2 shadow">
+                            <ul class="menu  px-1 text-lg font-medium text-gray-600 w-full">
+                                <li><a>Home</a></li>
+                                <li><a>Shop</a></li>
+                                <li><a>Contact</a></li>
+                            </ul>
+                        </ul>
+                    </div>
+                    <div class="flex gap-3 items-center">
+                        <img class="w-full h-full" src="images/logo.webp" alt="">
+                        <h2 class="text-3xl font-semibold">Peddy</h2>
+                    </div>
+                </div>
+                <div class="navbar-center hidden lg:flex">
+                    <ul class="menu menu-horizontal px-1 text-lg font-medium text-gray-600">
+                        <li><a>Home</a></li>
+                        <li><a>Shop</a></li>
+                        <li><a>Contact</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-end">
+                    <a
+                        class="bg-gray-100 p-3 w-12 h-12 flex justify-center items-center border-1 border-gray-200 rounded-full"><i
+                            class="fa-regular fa-user"></i></a>
+                </div>
+            </div>
+        </nav>
+    </header>
 </body>
 
 </html>
