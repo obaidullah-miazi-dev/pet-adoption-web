@@ -28,7 +28,7 @@ const displayAllPets = (pets) =>{
     console.log(pets)
     pets.forEach(pet =>{
         petsContainer.innerHTML+= `
-         <div class=" p-5 border-1 border-gray-200 rounded-lg space-y-2">
+         <div class=" p-5 border-1 border-gray-200 rounded-lg space-y-2 mb-5">
                         <img class="rounded-lg w-full" src="${pet.image}" alt="">
                         <h3 class="text-lg font-bold">${pet.pet_name}</h3>
                         <p class="text-gray-600">Breed: ${pet.breed}</p>
@@ -49,15 +49,27 @@ const displayAllPets = (pets) =>{
 
 const displayCategories = (categories) => {
     categories.forEach(category => {
+        
         categoryContainer.innerHTML += `
-        <div
+        <div id="category-btn"
                     class="flex items-center justify-center gap-5 hover:bg-[#0e798123] border-[#0e79811e] border-2 p-6 w-[280px] md:w-[350px] rounded-lg">
                     <img src="${category.category_icon}" alt="">
                     <p class="text-2xl font-bold">${category.category}s</p>
                 </div>
         `
+        loadPetsByCategory(category.category)
     });
 }
+
+const loadPetsByCategory = (categoryName) =>{
+    
+}
+
+categoryContainer.addEventListener('click',(e)=>{
+    if(e.target.id=== 'category-btn'){
+        
+    }
+})
 
 loadCategories()
 loadAllPets()
