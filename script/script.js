@@ -86,6 +86,10 @@ const loadPetsByCategories = async (categoryName) => {
 }
 
 const displayPetsByCategories= (pets)=>{
+    if(pets.length===0){
+        noDataFound()
+        return;
+    }
     petsContainer.innerHTML='';
      pets.forEach(pet => {
         petsContainer.innerHTML += `
@@ -109,7 +113,14 @@ const displayPetsByCategories= (pets)=>{
 
 
 
-
+const noDataFound = () =>{
+    petsContainer.innerHTML=`
+    <div class="col-span-3 mx-auto text-center py-10">
+    <img class="block mx-auto" src="images/error.webp">
+    <h1 class="text-4xl font-bold mt-5">No Information Available</h1>
+    </div>
+    `
+}
 
 loadCategories()
 loadAllPets()
