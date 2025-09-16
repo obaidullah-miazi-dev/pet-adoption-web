@@ -1,5 +1,6 @@
 const categoryContainer = document.getElementById('category-container')
 const petsContainer = document.getElementById('pets-container')
+const likedPetsContainer = document.getElementById('liked-pets-container')
 
 const loadCategories = async () => {
     try {
@@ -26,14 +27,14 @@ const displayCategories = (categories) => {
         `
     });
 
-    categoryContainer.addEventListener('click',(e)=>{
+    categoryContainer.addEventListener('click', (e) => {
         const categoryBtn = document.querySelectorAll('.category-btn')
-        categoryBtn.forEach(btn =>{
+        categoryBtn.forEach(btn => {
             btn.classList.remove('bg-[#0e798123]')
         })
 
-        if(e.target.className.includes('category-btn')){
-         e.target.classList.add('bg-[#0e798123]')   
+        if (e.target.className.includes('category-btn')) {
+            e.target.classList.add('bg-[#0e798123]')
         }
 
         loadPetsByCategories(e.target.id)
@@ -57,13 +58,13 @@ const displayAllPets = (pets) => {
         petsContainer.innerHTML += `
          <div class=" p-5 border-1 border-gray-200 rounded-lg space-y-2 mb-5">
                         <img class="rounded-lg w-full" src="${pet.image}" alt="">
-                        <h3 class="text-lg font-bold">hello</h3>
+                        <h3 class="text-lg font-bold">${pet.pet_name}</h3>
                         <p class="text-gray-600">Breed: ${pet.breed}</p>
                         <p class="text-gray-600">Birth: ${pet.date_of_birth}</p>
                         <p class="text-gray-600">Gender: ${pet.gender}</p>
                         <p class="text-gray-600">Price : ${pet.price}$</p>
                         <div class="flex justify-between pt-5 border-t-2 border-gray-300">
-                            <button class="btn px-6 text-[#0E7A81]">👍</button>
+                            <button class="like-btn btn px-6 text-[#0E7A81]">👍</button>
                             <button class="btn px-6 text-[#0E7A81]">Adopt</button>
                             <button class="btn px-6 text-[#0E7A81]">Details</button>
                         </div>
@@ -85,23 +86,23 @@ const loadPetsByCategories = async (categoryName) => {
     }
 }
 
-const displayPetsByCategories= (pets)=>{
-    if(pets.length===0){
+const displayPetsByCategories = (pets) => {
+    if (pets.length === 0) {
         noDataFound()
         return;
     }
-    petsContainer.innerHTML='';
-     pets.forEach(pet => {
+    petsContainer.innerHTML = '';
+    pets.forEach(pet => {
         petsContainer.innerHTML += `
          <div class=" p-5 border-1 border-gray-200 rounded-lg space-y-2 mb-5">
                         <img class="rounded-lg w-full" src="${pet.image}" alt="">
-                        <h3 class="text-lg font-bold">hello</h3>
+                        <h3 class="text-lg font-bold">${pet.pet_name}</h3>
                         <p class="text-gray-600">Breed: ${pet.breed}</p>
                         <p class="text-gray-600">Birth: ${pet.date_of_birth}</p>
                         <p class="text-gray-600">Gender: ${pet.gender}</p>
                         <p class="text-gray-600">Price : ${pet.price}$</p>
                         <div class="flex justify-between pt-5 border-t-2 border-gray-300">
-                            <button class="btn px-6 text-[#0E7A81]">👍</button>
+                            <button class="like-btn btn px-6 text-[#0E7A81]">👍</button>
                             <button class="btn px-6 text-[#0E7A81]">Adopt</button>
                             <button class="btn px-6 text-[#0E7A81]">Details</button>
                         </div>
@@ -111,10 +112,22 @@ const displayPetsByCategories= (pets)=>{
     })
 }
 
+petsContainer.addEventListener('click', (e) => {
+    const img =e.target.parentNode.parentNode.children[0].src 
+    if (e.target.className.includes('like-btn')) {
+        console.log(img)
+        likedPetsContainer.innerHTML+=`
+        
+        <div class="mb-4 md:mb-0"><img class="rounded-lg" src="${img}" alt=""></div>
+        
+        `
+    }
+})
 
 
-const noDataFound = () =>{
-    petsContainer.innerHTML=`
+
+const noDataFound = () => {
+    petsContainer.innerHTML = `
     <div class="col-span-3 mx-auto text-center py-10">
     <img class="block mx-auto" src="images/error.webp">
     <h1 class="text-4xl font-bold mt-5">No Information Available</h1>
