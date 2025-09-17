@@ -94,7 +94,9 @@ const displayPetsByCategories = (pets) => {
         noDataFound()
         return;
     }
-    petsContainer.innerHTML = '';
+    petsContainer.innerHTML = ` <div class="col-span-3">
+                        <h3 class="text-2xl font-bold">Best Deal For you</h3>
+                    </div>`;
     pets.forEach(pet => {
         // console.log(pet.petId)
         petsContainer.innerHTML += `
@@ -147,8 +149,8 @@ const loadPetsDetailsById = async (petId) => {
 
 const displayPetsDetailsById = (pets) => {
     modal.showModal()
-    modalContainer.innerHTML='';
-    modalContainer.innerHTML=`
+    modalContainer.innerHTML = '';
+    modalContainer.innerHTML = `
     <div id="${pets.petId}" class="rounded-lg space-y-2">
                         <img class="rounded-lg w-full" src="${pets.image}" alt="">
                         <h3 class="text-xl font-bold">${pets.pet_name}</h3>
