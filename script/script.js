@@ -1,6 +1,8 @@
 const categoryContainer = document.getElementById('category-container')
 const petsContainer = document.getElementById('pets-container')
 const likedPetsContainer = document.getElementById('liked-pets-container')
+const modal = document.getElementById('modal')
+const modalContainer = document.getElementById('modal-container')
 
 const loadCategories = async () => {
     try {
@@ -56,7 +58,7 @@ const displayAllPets = (pets) => {
     // console.log(pets)
     pets.forEach(pet => {
         petsContainer.innerHTML += `
-         <div class=" p-5 border-1 border-gray-200 rounded-lg space-y-2 mb-5">
+         <div id="${pet.petId}" class=" p-5 border-1 border-gray-200 rounded-lg space-y-2 mb-5">
                         <img class="rounded-lg w-full" src="${pet.image}" alt="">
                         <h3 class="text-lg font-bold">${pet.pet_name}</h3>
                         <p class="text-gray-600">Breed: ${pet.breed}</p>
@@ -66,11 +68,12 @@ const displayAllPets = (pets) => {
                         <div class="flex justify-between pt-5 border-t-2 border-gray-300">
                             <button class="like-btn btn px-6 text-[#0E7A81]">👍</button>
                             <button class="btn px-6 text-[#0E7A81]">Adopt</button>
-                            <button class="btn px-6 text-[#0E7A81]">Details</button>
+                            <button class="details-btn btn px-6 text-[#0E7A81]">Details</button>
                         </div>
                     </div>
 
     `
+        // loadPetsDetailsById(pet.petId)
     })
 
 }
@@ -93,8 +96,9 @@ const displayPetsByCategories = (pets) => {
     }
     petsContainer.innerHTML = '';
     pets.forEach(pet => {
+        // console.log(pet.petId)
         petsContainer.innerHTML += `
-         <div class=" p-5 border-1 border-gray-200 rounded-lg space-y-2 mb-5">
+         <div id="${pet.petId}" class=" p-5 border-1 border-gray-200 rounded-lg space-y-2 mb-5">
                         <img class="rounded-lg w-full" src="${pet.image}" alt="">
                         <h3 class="text-lg font-bold">${pet.pet_name}</h3>
                         <p class="text-gray-600">Breed: ${pet.breed}</p>
@@ -104,7 +108,7 @@ const displayPetsByCategories = (pets) => {
                         <div class="flex justify-between pt-5 border-t-2 border-gray-300">
                             <button class="like-btn btn px-6 text-[#0E7A81]">👍</button>
                             <button class="btn px-6 text-[#0E7A81]">Adopt</button>
-                            <button class="btn px-6 text-[#0E7A81]">Details</button>
+                            <button class="details-btn btn px-6 text-[#0E7A81]">Details</button>
                         </div>
                     </div>
 
@@ -113,16 +117,54 @@ const displayPetsByCategories = (pets) => {
 }
 
 petsContainer.addEventListener('click', (e) => {
-    const img =e.target.parentNode.parentNode.children[0].src 
+    const img = e.target.parentNode.parentNode.children[0].src
     if (e.target.className.includes('like-btn')) {
-        console.log(img)
-        likedPetsContainer.innerHTML+=`
+        likedPetsContainer.innerHTML += `
         
         <div class="mb-4 md:mb-0"><img class="rounded-lg" src="${img}" alt=""></div>
         
         `
     }
 })
+
+petsContainer.addEventListener('click', (e) => {
+    // console.log(e.target.parentNode.parentNode.id)
+    if (e.target.className.includes('details-btn')) {
+        loadPetsDetailsById(e.target.parentNode.parentNode.id)
+
+    }
+
+
+})
+
+const loadPetsDetailsById = async (petId) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
+    const data = await res.json()
+    // displayPetsDetailsById(data.petData)
+    displayPetsDetailsById(data.petData)
+}
+
+
+const displayPetsDetailsById = (pets) => {
+    modal.showModal()
+    modalContainer.innerHTML='';
+    modalContainer.innerHTML=`
+    <div id="${pets.petId}" class="rounded-lg space-y-2">
+                        <img class="rounded-lg w-full" src="${pets.image}" alt="">
+                        <h3 class="text-xl font-bold">${pets.pet_name}</h3>
+                        <p class="text-gray-600">Breed: ${pets.breed}</p>
+                        <p class="text-gray-600">Birth: ${pets.date_of_birth}</p>
+                        <p class="text-gray-600">Gender: ${pets.gender}</p>
+                        <p class="text-gray-600">Price : ${pets.price}$</p>
+                        <div class="pt-2 border-t-2 border-gray-200">
+                        <h3 class="font-semibold text-lg mb-2">Details Information</h3>
+                        <p class="text-gray-600">${pets.pet_details}</p>
+                        </div>
+                    </div>
+    `
+
+
+}
 
 
 
