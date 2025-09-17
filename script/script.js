@@ -123,7 +123,7 @@ petsContainer.addEventListener('click', (e) => {
     if (e.target.className.includes('like-btn')) {
         likedPetsContainer.innerHTML += `
         
-        <div class="mb-4 md:mb-0"><img class="rounded-lg" src="${img}" alt=""></div>
+        <div class="mb-4 md:mb-0"><img class="rounded-lg w-full" src="${img}" alt=""></div>
         
         `
     }
